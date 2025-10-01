@@ -1,0 +1,103 @@
+# Taller de Expresiones Regulares (Regex) 🔍
+
+---
+
+## Parte 1: Identificadores Válidos
+
+Los identificadores deben comenzar con una letra o un guion bajo y pueden contener letras, números o guiones bajos posteriormente.
+
+### Expresión Regular para Identificadores
+
+$$`[a-zA-Z\_][a-zA-Z0-9\_]*`$$
+
+| Componente | Descripción |
+| :--- | :--- |
+| `[a-zA-Z\_]` | **Inicio:** Debe ser una letra (mayúscula o minúscula) o un guion bajo. |
+| `[a-zA-Z0-9\_]*` | **Cuerpo:** Cero o más (`*`) letras, números o guiones bajos. |
+
+---
+
+## Parte 2: Números Enteros y Decimales
+
+### 1. Expresión Regular para Números Enteros
+
+Detecta enteros positivos, negativos o cero.
+
+$$`[+-]?\d+`$$
+
+| Componente | Descripción |
+| :--- | :--- |
+| `[+-]?` | Un signo más (`+`) o menos (`-`) **opcional** (`?`). |
+| `\d+` | Uno o más dígitos (donde $\text{\d}$ es un atajo para $[0-9]$). |
+
+### 2. Expresión Regular para Números Decimales
+
+Detecta números con punto decimal, incluyendo el signo opcional.
+
+$$`[+-]?\d+\.\d+`$$
+
+| Componente | Descripción |
+| :--- | :--- |
+| `[+-]?` | Signo opcional al inicio. |
+| `\d+` | Uno o más dígitos antes del punto. |
+| `\.` | El **punto decimal literal** (escapado con `\`). |
+| `\d+` | Uno o más dígitos después del punto. |
+
+---
+
+## Parte 3: Operadores Aritméticos y Relacionales
+
+### Expresión Regular para Operadores Aritméticos
+
+Detecta los operadores: $+$, $-$, $*$, $/$ y $\%$.
+
+$$`[+\-*/%]`$$
+
+### Expresión Regular para Operadores Relacionales
+
+Detecta los operadores: $==$, $!=$, $<$, $>$, $\le$, $\ge$.
+
+$$`(?:==|!=|<=|>=|<|>)`$$
+
+*Nota: Las secuencias de dos caracteres ($==, !=, \le, \ge$) se listan primero para asegurar su correcta detección antes que los operadores de un solo carácter.*
+
+---
+
+## Parte 4: Palabras Reservadas Simples
+
+Identifica las palabras reservadas: `if`, `else`, `while`, `for`, `return`.
+
+### Expresión Regular para Palabras Reservadas
+
+$$`\b(if|else|while|for|return)\b`$$
+
+* **$\text{\b}$ (Delimitador de palabra):** Es crucial usar el delimitador de palabra (*Word Boundary*) para asegurar que solo coincidan las palabras completas.
+
+---
+
+## Parte 5: Mini Reto Integrador
+
+**Código a analizar:**
+let num = 25;
+if(num >= 10) {
+return num + 5;
+}
+
+
+### Clasificación Léxica de Fragmentos
+
+Se clasifican los fragmentos clave del código:
+
+| Fragmento | Categoría Léxica |
+| :--- | :--- |
+| `let` | **Identificador** |
+| `num` | **Identificador** |
+| `25` | **Número** (Entero) |
+| `if` | **Palabra Reservada** |
+| `num` | **Identificador** |
+| `>=` | **Operador** (Relacional) |
+| `10` | **Número** (Entero) |
+| `return` | **Palabra Reservada** |
+| `num` | **Identificador** |
+| `+` | **Operador** (Aritmético) |
+| `5` | **Número** (Entero) |
